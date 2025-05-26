@@ -96,102 +96,126 @@ session_start();
 <!-- Food Search Section End -->
 
    
-
-    <!-- Foods Section Start -->
+<!-- Foods Section Start -->
     <section class="food-menu">
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
             <div class="heading-border"></div>
             <div class="grid-2">
-                <div class="food-menu-box">
-                    <form action="">
-                        <div class="food-menu-img">
-                            <img src="img/food/p1.jpg" alt="" class="img-responsive img-curve">
-                        </div>
-                        <div class="food-menu-desc">
-                            <h4>Pizza</h4>
-                            <p class="food-price">$8.00</p>
-                            <p class="food-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus excepturi porro.</p>
-                            <input type="number" value="1" min="1">
-                            <input type="submit" class="btn-primary" value="Add To Cart">
-                        </div>
-                    </form>
-                </div>
-                <div class="food-menu-box">
-                    <form action="">
-                        <div class="food-menu-img">
-                            <img src="img/food/s1.jpg" alt="" class="img-responsive img-curve">
-                        </div>
-                        <div class="food-menu-desc">
-                            <h4>Sandwich</h4>
-                            <p class="food-price">$8.00</p>
-                            <p class="food-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus excepturi porro.</p>
-                            <input type="number" value="1" min="1">
-                            <input type="submit" class="btn-primary" value="Add To Cart">
-                        </div>
-                    </form>
-                </div>
-                <div class="food-menu-box">
-                    <form action="">
-                        <div class="food-menu-img">
-                            <img src="img/food/b1.jpg" alt="" class="img-responsive img-curve">
-                        </div>
-                        <div class="food-menu-desc">
-                            <h4>Burger</h4>
-                            <p class="food-price">$8.00</p>
-                            <p class="food-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus excepturi porro.</p>
-                            <input type="number" value="1" min="1">
-                            <input type="submit" class="btn-primary" value="Add To Cart">
-                        </div>
-                    </form>
-                </div>
-                <div class="food-menu-box">
-                    <form action="">
-                        <div class="food-menu-img">
-                            <img src="img/food/p1.jpg" alt="" class="img-responsive img-curve">
-                        </div>
-                        <div class="food-menu-desc">
-                            <h4>Pizza</h4>
-                            <p class="food-price">$8.00</p>
-                            <p class="food-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus excepturi porro.</p>
-                            <input type="number" value="1" min="1">
-                            <input type="submit" class="btn-primary" value="Add To Cart">
-                        </div>
-                    </form>
-                </div>
-                <div class="food-menu-box">
-                    <form action="">
-                        <div class="food-menu-img">
-                            <img src="img/food/s1.jpg" alt="" class="img-responsive img-curve">
-                        </div>
-                        <div class="food-menu-desc">
-                            <h4>Sandwich</h4>
-                            <p class="food-price">$8.00</p>
-                            <p class="food-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus excepturi porro.</p>
-                            <input type="number" value="1" min="1">
-                            <input type="submit" class="btn-primary" value="Add To Cart">
-                        </div>
-                    </form>
-                </div>
-                <div class="food-menu-box">
-                    <form action="">
-                        <div class="food-menu-img">
-                            <img src="img/food/b1.jpg" alt="" class="img-responsive img-curve">
-                        </div>
-                        <div class="food-menu-desc">
-                            <h4>Burger</h4>
-                            <p class="food-price">$8.00</p>
-                            <p class="food-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus excepturi porro.</p>
-                            <input type="number" value="1" min="1">
-                            <input type="submit" class="btn-primary" value="Add To Cart">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Foods Section End -->
+            <div class="food-menu-box">
+               <div class="food-menu-img">
+                 <img src="img/food/p1.jpg" alt="" class="img-responsive img-curve">
+              </div>
+        <div class="food-menu-desc">
+        <h4>Pizza</h4>
+        <p class="food-price">$8.00</p>
+        <p class="food-details">A slice of heaven in every bite – where cheese meets cravings!</p>
+        <input type="number" class="qty-input" value="1" min="1">
+        <button 
+    class="btn-primary add-to-cart"
+    data-id="1" 
+    data-name="Pizza"
+    data-price="8.00"
+    data-img="img/food/p1.jpg">Add To Cart</button>
 
+    </div>
+</div>
+
+              
+<div class="food-menu-box">
+<div class="food-menu-img">
+    <img src="img/food/b1.jpg" alt="" class="img-responsive img-curve">
+    </div>
+    <div class="food-menu-desc">
+        <h4>Burger</h4>
+        <p class="food-price">$8.00</p>
+        <p class="food-details">Stacked high, grilled to perfection – the burger your appetite deserves</p>
+        <input type="number" class="qty-input" value="1" min="1">
+        <button 
+            class="btn-primary add-to-cart"
+            data-id="2"
+            data-name="Burger"
+            data-price="8.00"
+            data-img="img/food/b1.jpg">Add To Cart</button>
+    </div>
+</div>
+
+<div class="food-menu-box">
+    <div class="food-menu-img">
+        <img src="img/food/s1.jpg" alt="" class="img-responsive img-curve">
+    </div>
+    <div class="food-menu-desc">
+        <h4>Sandwich</h4>
+        <p class="food-price">$8.00</p>
+        <p class="food-details">Freshly made, perfectly layered – every sandwich tells a story.</p>
+        <input type="number" class="qty-input" value="1" min="1">
+        <button 
+            class="btn-primary add-to-cart"
+              data-id="3"
+            data-name="sandwich"
+            data-price="8.00"
+            data-img="img/food/s1.jpg">Add To Cart</button>
+    </div>
+</div>
+
+<div class="food-menu-box">
+    <div class="food-menu-img">
+        <img src="img/food/m1.jpg" alt="" class="img-responsive img-curve">
+    </div>
+    <div class="food-menu-desc">
+        <h4>Momos</h4>
+        <p class="food-price">$8.00</p>
+        <p class="food-details">Little pockets of joy, steamed or fried – taste the love in every momo.</p>
+        <input type="number" class="qty-input" value="1" min="1">
+        <button 
+            class="btn-primary add-to-cart"
+              data-id="4"
+            data-name="momos"
+            data-price="8.00"
+            data-img="img/food/m1.jpg">Add To Cart</button>
+    </div>
+</div>
+              
+<div class="food-menu-box">
+    <div class="food-menu-img">
+        <img src="img/food/ps1.jpg" alt="" class="img-responsive img-curve">
+    </div>
+    <div class="food-menu-desc">
+        <h4>Pasta</h4>
+        <p class="food-price">$9.00</p>
+        <p class="food-details">Twirl into flavor – creamy, cheesy, and utterly irresistible pasta.</p>
+        <input type="number" class="qty-input" value="1" min="1">
+        <button 
+            class="btn-primary add-to-cart"
+              data-id="5"
+            data-name="pasta"
+            data-price="9.00"
+            data-img="img/food/ps1.jpg">Add To Cart</button>
+    </div>
+</div>
+<div class="food-menu-box">
+    <div class="food-menu-img">
+        <img src="img/food/f1.jpg" alt="" class="img-responsive img-curve">
+    </div>
+    <div class="food-menu-desc">
+        <h4>Fries</h4>
+        <p class="food-price">$9.00</p>
+        <p class="food-details">Golden. Crispy. Addictive. One bite and you're hooked!</p>
+        <input type="number" class="qty-input" value="1" min="1">
+        <button 
+            class="btn-primary add-to-cart"
+              data-id="6"
+            data-name="fries"
+            data-price="9.00"
+            data-img="img/food/f1.jpg">Add To Cart</button>
+    </div>
+</div>
+               
+
+</div>
+</div>
+       
+    </section>
     <!-- Footer Section Start -->
     <section class="footer">
         <div class="container">
@@ -230,7 +254,7 @@ session_start();
     <!-- Copyright Section start -->
     <section class="copyright">
         <div class="container text-center">
-            <p>All rights reserved. Design By <a href="#">Code Arcade</a></p>
+            <p>All rights reserved. Design By <a href="#">NAC</a></p>
         </div>
         <a id="back-to-top" class="btn-primary">
             <i class="fa fa-angle-double-up"></i>

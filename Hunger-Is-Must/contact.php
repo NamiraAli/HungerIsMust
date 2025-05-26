@@ -83,20 +83,20 @@ session_start();
             <h2 class="text-center">Get in touch</h2>
             <div class="heading-border"></div>
 
-            <form action="" class="form">
+            <form action="userinfo.php" method="post" class="form">
                 <fieldset>
                     <legend>Contact Us</legend>
                     <p class="label">Full Name</p>
-                    <input type="text" placeholder="Enter your name..." required>
+                    <input type="text" name="user" placeholder="Enter your name..." required>
                     <p class="label">Email</p>
-                    <input type="email" placeholder="Enter your email..." required>
+                    <input type="email" name="email" placeholder="Enter your email..." required>
                     <p class="label">Phone Number</p>
-                    <input type="contact" placeholder="Enter your phone..." required>
+                    <input type="contact" name="mobile" placeholder="Enter your phone..." required>
                     <p class="label">Subject</p>
-                    <input type="text" placeholder="Enter your subject..." required>
+                    <input type="text" name="subject" placeholder="Enter your subject..." required>
                     <p class="label">Message</p>
-                    <textarea name="" id="" rows="5" placeholder="Enter your message..." required></textarea>
-                    <input type="submit" value="Submit" class="btn-primary">
+                    <textarea id="" rows="5"  name="message" placeholder="Enter your message..." required></textarea>
+                    <input type="submit"  value="Submit" class="btn-primary">
                 </fieldset>
             </form>
         </div>
@@ -108,8 +108,16 @@ session_start();
         <h2 class="text-center">Find Us</h2>
         <div class="heading-border"></div>
 
-        <iframe id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d118103.45687625333!2d91.81986775!3d22.32593435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1671287502415!5m2!1sen!2sbd" ></iframe>
-     </section>
+        <iframe id="gmap_canvas" 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.818387205014!2d79.3081775!3d19.9320566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd2d414431440f3%3A0x9bbdb0522a1d0620!2sRajiv%20Gandhi%20College%20of%20Engineering%2C%20Research%20and%20Technology%2C%20Chandrapur!5e0!3m2!1sen!2sbd!4v1747381232479!5m2!1sen!2sbd" 
+    width="600" 
+    height="450" 
+    style="border:0;" 
+    allowfullscreen="" 
+    loading="lazy" 
+    referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
      <!-- Map Section End -->
 
     <!-- Footer Section Start -->
@@ -150,7 +158,7 @@ session_start();
     <!-- Copyright Section start -->
     <section class="copyright">
         <div class="container text-center">
-            <p>All rights reserved. Design By <a href="#">Code Arcade</a></p>
+            <p>All rights reserved. Design By <a href="#">NAC</a></p>
         </div>
         <a id="back-to-top" class="btn-primary">
             <i class="fa fa-angle-double-up"></i>

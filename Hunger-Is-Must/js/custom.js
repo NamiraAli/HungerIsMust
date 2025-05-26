@@ -13,6 +13,65 @@ $(function () {
   // Shopping Cart Toggle JS
   $("#shopping-cart").on("click", function () {
     $("#cart-content").toggle("blind", "", 500);
+    fetchCart(); // Fetch cart contents when toggling
+  });
+
+  // Add to Cart AJAX
+  document.querySelectorAll(".add-to-cart").forEach(button => {
+    console.log('Button found:', button); 
+    button.addEventListener("click", () => {
+      const name = button.dataset.name;
+      const price = parseFloat(button.dataset.price);
+      const img = button.dataset.img;
+      const qtyInput = button.previousElementSibling;
+      const qty = parseInt(qtyInput.value) || 1;
+      const itemId = button.dataset.id;
+
+      console.log("Adding to cart:", name, price, img, qty, itemId);//debug
+
+      $.ajax({
+        url: 'cart.php',
+        type: 'POST',
+        data: {
+          action: 'add',
+          item_id: itemId,
+          item_name: name,
+          item_price: price,
+          item_img: img,
+          item_qty: qty
+        },
+        dataType: 'json',
+        success: function (response) {
+          if (response.cart) {
+            updateCartUI(response.cart);
+          }
+        },
+        error: function () {
+          alert('Could not add item to cart.');
+        }
+      });
+    });
+  });
+
+  // Delete Cart Item JS
+  $(document).on("click", ".btn-delete", function (event) {
+    event.preventDefault();
+    const itemId = $(this).data('id');
+
+    $.ajax({
+      url: 'cart.php',
+      type: 'POST',
+      data: { action: 'remove', item_id: itemId },
+      dataType: 'json',
+      success: function (response) {
+        if (response.cart) {
+          updateCartUI(response.cart);
+        }
+      },
+      error: function () {
+        alert('Could not remove item from cart.');
+      }
+    });
   });
 
   // Back-To-Top Button JS
@@ -26,139 +85,54 @@ $(function () {
     );
   });
 
-  // Delete Cart Item JS
-  $(document).on("click", ".btn-delete", function (event) {
-    event.preventDefault();
-    $(this).closest("tr").remove();
-    updateTotal();
-  });
-
-  // Update Total Price JS
-  function updateTotal() {
-    let total = 0;
-    $("#cart-content tr").each(function () {
-      const rowTotal = parseFloat($(this).find("td:nth-child(5)").text().replace("$", ""));
-      if (!isNaN(rowTotal)) {
-        total += rowTotal;
+  // Fetch Cart on Page Load
+  function fetchCart() {
+    $.ajax({
+      url: 'cart.php',
+      type: 'POST',
+      data: { action: 'fetch' },
+      dataType: 'json',
+      success: function (response) {
+        if (response.cart) {
+          updateCartUI(response.cart);
+        }
+      },
+      error: function () {
+        alert('Could not fetch cart.');
       }
     });
-    $("#cart-content th:nth-child(5)").text("$" + total.toFixed(2));
-    $(".tbl-full th:nth-child(6)").text("$" + total.toFixed(2));
   }
-});
 
-// shopping cart dynamic behaviour
+  // Update Cart UI
+  function updateCartUI(cart) {
+    const cartItemsContainer = $("#cart-items");
+    const cartCount = $("#cart-count");
+    const cartTotal = $("#cart-total");
 
-const cartItems = [];
-const cartTable = document.querySelector("#cart-content .cart-table");
-
-document.querySelectorAll(".add-to-cart").forEach(button => {
-    button.addEventListener("click", () => {
-        const name = button.dataset.name;
-        const price = parseFloat(button.dataset.price);
-        const img = button.dataset.img;
-        const qtyInput = button.previousElementSibling;
-        const qty = parseInt(qtyInput.value) || 1;
-
-        const existingItem = cartItems.find(item => item.name === name);
-        if (existingItem) {
-            existingItem.qty += qty;
-            existingItem.total = existingItem.qty * existingItem.price;
-        } else {
-            cartItems.push({ name, price, img, qty, total: price * qty });
-        }
-
-        updateCartDisplay();
-    });
-});
-
-function updateCartDisplay() {
-    cartTable.innerHTML = `
-        <tr>
-            <th>Food</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Qty</th>
-            <th>Total</th>
-            <th>Action</th>
-        </tr>
-    `;
-
-    let grandTotal = 0;
-    cartItems.forEach((item, index) => {
-        grandTotal += item.total;
-        cartTable.innerHTML += `
-            <tr>
-                <td><img src="${item.img}" width="50"></td>
-                <td>${item.name}</td>
-                <td>$${item.price.toFixed(2)}</td>
-                <td>${item.qty}</td>
-                <td>$${item.total.toFixed(2)}</td>
-                <td><a href="#" class="btn-delete" onclick="removeItem(${index})">&times;</a></td>
-            </tr>
-        `;
-    });
-
-    cartTable.innerHTML += `
-        <tr>
-            <th colspan="4">Total</th>
-            <th>$${grandTotal.toFixed(2)}</th>
-            <th></th>
-        </tr>
-    `;
-
-    document.querySelector(".badge").textContent = cartItems.reduce((sum, i) => sum + i.qty, 0);
-}
-
-function removeItem(index) {
-    cartItems.splice(index, 1);
-    updateCartDisplay();
-}
-
-let cart = [];
-
-function updateCartUI() {
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartCount = document.getElementById('cart-count');
-    const cartTotal = document.getElementById('cart-total');
-
-    cartItemsContainer.innerHTML = ''; // Clear cart
+    cartItemsContainer.empty();
     let total = 0;
+    let count = 0;
 
-    cart.forEach((item, index) => {
-        total += item.price * item.qty;
-        const row = `
-            <tr>
-                <td><img src="${item.img}" alt="Food" width="50"></td>
-                <td>${item.name}</td>
-                <td>$${item.price.toFixed(2)}</td>
-                <td>${item.qty}</td>
-                <td>$${(item.price * item.qty).toFixed(2)}</td>
-                <td><a href="#" class="btn-delete" onclick="removeItem(${index})">&times;</a></td>
-            </tr>
-        `;
-        cartItemsContainer.innerHTML += row;
+    $.each(cart, function(id, item) {
+      total += item.price * item.qty;
+      count += item.qty;
+
+      cartItemsContainer.append(`
+        <tr>
+          <td><img src="${item.img}" alt="Food" width="50" /></td>
+          <td>${item.name}</td>
+          <td>$${parseFloat(item.price).toFixed(2)}</td>
+          <td>${item.qty}</td>
+          <td>$${(item.price * item.qty).toFixed(2)}</td>
+          <td><a href="#" class="btn-delete" data-id="${id}">&times;</a></td>
+        </tr>
+      `);
     });
 
-    cartCount.textContent = cart.length;
-    cartTotal.textContent = `$${total.toFixed(2)}`;
-}
+    cartCount.text(count);
+    cartTotal.text(`$${total.toFixed(2)}`);
+  }
 
-function addToCart(name, price, img) {
-    const existing = cart.find(item => item.name === name);
-    if (existing) {
-        existing.qty += 1;
-    } else {
-        cart.push({ name, price, qty: 1, img });
-    }
-    updateCartUI();
-}
-
-function removeItem(index) {
-    cart.splice(index, 1);
-    updateCartUI();
-}
-
-// OPTIONAL: For testing, you can call these in your HTML buttons like:
-// <button onclick="addToCart('Pizza', 8.00, 'img/food/p1.jpg')">Add Pizza</button>
-
+  // Initialize cart display on load
+  fetchCart();
+});

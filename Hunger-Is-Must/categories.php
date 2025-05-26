@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,6 +78,7 @@
     <!-- Navigation Section End -->
 
     <!-- Category Section Start -->
+     <!-- we have used ?search= food item to get dynamic behaviour in search section -->
     <section class="categories">
         <div class="container">
             <h2 class="text-center">Explore Foods</h2>
@@ -143,11 +148,11 @@
                     <h3>Social Links</h3><br>
                     <div class="social">
                         <ul>
-                            <li><a href="#"><img src="https://img.icons8.com/color/48/null/facebook-new.png"/></a></li>
-                            <li><a href="#"><img src="https://img.icons8.com/fluency/48/null/instagram-new.png"/></a></li>
-                            <li><a href="#"><img src="https://img.icons8.com/color/48/null/twitter--v1.png"/></a></li>
-                            <li><a href="#"><img src="https://img.icons8.com/color/48/null/linkedin-circled--v1.png"/></a></li>
-                            <li><a href="#"><img src="https://img.icons8.com/color/48/null/youtube-play.png"/></a></li>
+                            <li><a href="https://youtube.com/shorts/NxnW7RISit0?si=yxHuD6ZQW17mL0pb"><img src="https://img.icons8.com/color/48/null/facebook-new.png"/></a></li>
+                            <li><a href="https://youtube.com/shorts/NxnW7RISit0?si=yxHuD6ZQW17mL0pb"><img src="https://img.icons8.com/fluency/48/null/instagram-new.png"/></a></li>
+                            <li><a href="https://youtube.com/shorts/NxnW7RISit0?si=yxHuD6ZQW17mL0pb"><img src="https://img.icons8.com/color/48/null/twitter--v1.png"/></a></li>
+                            <li><a href="https://youtube.com/shorts/NxnW7RISit0?si=yxHuD6ZQW17mL0pb"><img src="https://img.icons8.com/color/48/null/linkedin-circled--v1.png"/></a></li>
+                            <li><a href="https://youtube.com/shorts/NxnW7RISit0?si=yxHuD6ZQW17mL0pb"><img src="https://img.icons8.com/color/48/null/youtube-play.png"/></a></li>
                         </ul>
                     </div>
                 </div>
@@ -159,7 +164,7 @@
     <!-- Copyright Section start -->
     <section class="copyright">
         <div class="container text-center">
-            <p>All rights reserved. Design By <a href="#">Code Arcade</a></p>
+            <p>All rights reserved. Design By <a href="#">NAC</a></p>
         </div>
         <a id="back-to-top" class="btn-primary">
             <i class="fa fa-angle-double-up"></i>

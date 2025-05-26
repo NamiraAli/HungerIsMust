@@ -100,38 +100,48 @@ session_start();
                     <th>Total</th>
                     <th>Action</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td><img src="img/food/p1.jpg" alt="Food"></td>
-                    <td>Pizza</td>
-                    <td>$ 8.00</td>
-                    <td>1</td>
-                    <td>$ 8.00</td>
-                    <td><a href="#" class="btn-delete">&times;</a></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><img src="img/food/s1.jpg" alt="Food"></td>
-                    <td>Sandwich</td>
-                    <td>$ 8.00</td>
-                    <td>1</td>
-                    <td>$ 8.00</td>
-                    <td><a href="#" class="btn-delete">&times;</a></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><img src="img/food/b1.jpg" alt="Food"></td>
-                    <td>Burder</td>
-                    <td>$ 8.00</td>
-                    <td>1</td>
-                    <td>$ 8.00</td>
-                    <td><a href="#" class="btn-delete">&times;</a></td>
-                </tr>
-                <tr>
-                    <th colspan="5">Total</th>
-                    <th>$24.00</th>
-                    <th></th>
-                </tr>
+
+                <!-- dynamic behaviour below code manages the order page ussing session -->
+             <?php
+$grand_total = 0;
+if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])):
+    $sn = 1;
+    foreach ($_SESSION['cart'] as $item):
+        $quantity = $item['qty'] ?? 0;
+        $price = $item['price'] ?? 0;
+        $item_total = $price * $quantity;
+        $grand_total += $item_total;
+?>
+<tr>
+    <td><?php echo $sn++; ?></td>
+ 
+    <td>
+        <img src="<?php echo htmlspecialchars($item['img'] ?? ''); ?>" alt="Food" width="80">
+    </td>
+    <td><?php echo htmlspecialchars($item['name'] ?? 'N/A'); ?></td>
+    <td>$ <?php echo number_format($price, 2); ?></td>
+    <td><?php echo $quantity; ?></td>
+    <td>$ <?php echo number_format($item_total, 2); ?></td>
+    <td>
+        <a href="remove_item.php?id=<?php echo urlencode($item['id'] ?? ''); ?>" class="btn-delete">&times;</a>
+    </td>
+</tr>
+<?php
+    endforeach;
+else:
+?>
+<tr>
+    <td colspan="7" class="text-center">Your cart is empty.</td>
+</tr>
+<?php endif; ?>
+<tr>
+    <th colspan="5">Total</th>
+    <th>$<?php echo number_format($grand_total, 2); ?></th>
+    <th></th>
+</tr>
+
+<!-- dynamic behaviour above code -->
+
             </table>
             <form action="" class="form">
                 <fieldset>
@@ -178,11 +188,11 @@ session_start();
                     <h3>Social Links</h3><br>
                     <div class="social">
                         <ul>
-                            <li><a href="#"><img src="https://img.icons8.com/color/48/null/facebook-new.png"/></a></li>
-                            <li><a href="#"><img src="https://img.icons8.com/fluency/48/null/instagram-new.png"/></a></li>
-                            <li><a href="#"><img src="https://img.icons8.com/color/48/null/twitter--v1.png"/></a></li>
-                            <li><a href="#"><img src="https://img.icons8.com/color/48/null/linkedin-circled--v1.png"/></a></li>
-                            <li><a href="#"><img src="https://img.icons8.com/color/48/null/youtube-play.png"/></a></li>
+                            <li><a href="https://youtube.com/shorts/NxnW7RISit0?si=yxHuD6ZQW17mL0pb"><img src="https://img.icons8.com/color/48/null/facebook-new.png"/></a></li>
+                            <li><a href="https://youtube.com/shorts/NxnW7RISit0?si=yxHuD6ZQW17mL0pb"><img src="https://img.icons8.com/fluency/48/null/instagram-new.png"/></a></li>
+                            <li><a href="https://youtube.com/shorts/NxnW7RISit0?si=yxHuD6ZQW17mL0pb"><img src="https://img.icons8.com/color/48/null/twitter--v1.png"/></a></li>
+                            <li><a href="https://youtube.com/shorts/NxnW7RISit0?si=yxHuD6ZQW17mL0pb"><img src="https://img.icons8.com/color/48/null/linkedin-circled--v1.png"/></a></li>
+                            <li><a href="https://youtube.com/shorts/NxnW7RISit0?si=yxHuD6ZQW17mL0pb"><img src="https://img.icons8.com/color/48/null/youtube-play.png"/></a></li>
                         </ul>
                     </div>
                 </div>
@@ -194,7 +204,7 @@ session_start();
     <!-- Copyright Section start -->
     <section class="copyright">
         <div class="container text-center">
-            <p>All rights reserved. Design By <a href="#">Code Arcade</a></p>
+            <p>All rights reserved. Design By <a href="#">NAC</a></p>
         </div>
         <a id="back-to-top" class="btn-primary">
             <i class="fa fa-angle-double-up"></i>
